@@ -198,8 +198,8 @@ public class ReporteAtencionRestController {
 			}
 		}
 		else {
-			horaTrabajadaNocturna =7*60- (fechaInicio.getHour()+fechaInicio.getMinute());
-			horaTrabajadaNocturna2=fechaFin.getHour()*60 + fechaFin.getMinute()-20*60;
+			horaTrabajadaNocturna =7*60- (fechaInicio.getHour()*60+fechaInicio.getMinute());
+			horaTrabajadaNocturna2=fechaFin.getHour()*60 + fechaFin.getMinute()-(20*60);
 			horaTrabajadaBasica= 20*60 - 7*60;
 			if(pd.isSuperoTopeHoras()) {
 				pd.sethNocturnaExtra(pd.gethNocturnaExtra()+horaTrabajadaNocturna + horaTrabajadaNocturna2);
@@ -215,10 +215,12 @@ public class ReporteAtencionRestController {
 					pd.sethBasicaExtra(horaTrabajadaBasica);
 				}
 				else if(pd.getTopeHoraSemanal()+horaTrabajadaNocturna + horaTrabajadaBasica > 2880){
+					logger.info("page is year"+ horaTrabajadaNocturna);
 					pd.setTopeHoraSemanal(pd.getTopeHoraSemanal()+horaTrabajadaNocturna);
 					pd.sethNocturna(pd.gethNocturna()+horaTrabajadaNocturna);
 					pd.sethBasica(pd.gethBasica()+2880-pd.getTopeHoraSemanal());
 					pd.sethBasicaExtra(horaTrabajadaBasica-(2880-pd.getTopeHoraSemanal()));
+					pd.sethNocturnaExtra(pd.gethNocturnaExtra()+horaTrabajadaNocturna2);
 				}
 				else {
 					pd.setTopeHoraSemanal(pd.getTopeHoraSemanal()+horaTrabajadaNocturna+horaTrabajadaBasica);
