@@ -47,17 +47,19 @@ public class ReporteAtencionRestController {
 	public ResponseEntity<?> create(@Valid @RequestBody ReporteAtencion reporteAtencion,BindingResult result) {		
 		ReporteAtencion reporteAtencionNew=null;
 		Map<String,Object> response=new HashMap<>();
-		if(result.hasErrors()) {			
-			List<String> errors=result.getFieldErrors()
-					.stream()
-					.map(err->{
-						return "El campo '"+err.getField()+"' "+err.getDefaultMessage();
-					})
-					.collect(Collectors.toList());					
-					response.put("mensaje","Error al realizar la insercción en la base de datos");
-					response.put("errors",errors);					
-			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.BAD_REQUEST);
-		}	
+		if(result !=null) {				
+			if(result.hasErrors()) {			
+				List<String> errors=result.getFieldErrors()
+						.stream()
+						.map(err->{
+							return "El campo '"+err.getField()+"' "+err.getDefaultMessage();
+						})
+						.collect(Collectors.toList());					
+						response.put("mensaje","Error al realizar la insercción en la base de datos");
+						response.put("errors",errors);					
+				return new ResponseEntity<Map<String, Object>>(response,HttpStatus.BAD_REQUEST);
+			}	
+		}
 		
 		List<String> listError=new ArrayList<>();
 		listError=this.validaciones(reporteAtencion);	

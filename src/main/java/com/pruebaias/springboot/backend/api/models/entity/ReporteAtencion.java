@@ -60,8 +60,6 @@ public class ReporteAtencion implements Serializable {
 		this.idServicio = idServicio;
 	}	
 
-	
-
 	public Timestamp getFechaInicio() {
 		return fechaInicio;
 	}
@@ -77,20 +75,6 @@ public class ReporteAtencion implements Serializable {
 	public void setFechaFin(Timestamp fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-
-	/*public int getAnio() {
-		return fechaInicio.getYear();
-	}
-	
-	public int getSemana() {		
-		return fechaInicio.get;
-	}
-	
-	public int getDayWeek() {			  
-		return fechaInicio.get(Calendar.DAY_OF_WEEK);
-	}*/
-
-
 
 	/**
 	 * 
